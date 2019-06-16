@@ -22,8 +22,10 @@ public class FileRead {
         fr.read(a);
 
         for(char c : a) {
-            System.out.println(c);
+            System.out.print(c);
+//            System.out.println(c);
         }
         fr.close();
     }
 }
+
