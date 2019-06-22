@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Stack;
 
 class ListNode{
     int val;
@@ -18,7 +19,14 @@ public class ReverseLinkedList {
 //        }
 //        return ret;
 //    }
-
+    public static ArrayList<Integer> printListFromTailToHeadRecursion(ListNode listNode){
+        ArrayList<Integer> ret = new ArrayList<>();
+        if (listNode != null) {
+            ret.addAll(printListFromTailToHeadRecursion(listNode.next));
+            ret.add(listNode.val);
+        }
+        return ret;
+    }
     public  static ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
         // 头插法构建逆序链表
         ListNode head = new ListNode(-1);
@@ -36,6 +44,18 @@ public class ReverseLinkedList {
             head = head.next;
         }
         return ret;
+    }
+
+    public static ArrayList<Integer> printListFromTailToHeadStack(ListNode listNode) {
+        Stack<Integer> stack = new Stack<>();
+        while (listNode != null) {
+            stack.add(listNode.val);
+            listNode = listNode.next;
+        }
+        ArrayList<Integer> ret = new ArrayList<>();
+        while (!stack.isEmpty())
+            ret.add(stack.pop());
+        return  ret;
     }
 
     private static ListNode buildListNode(int[] input) {
@@ -62,11 +82,11 @@ public class ReverseLinkedList {
 //        mylist.add(2);
 //        mylist.add(3);
 //        System.out.println(mylist.toString());
-        int[] input=new int[]{1,2,3,3,4,4,5};
+        int[] input=new int[]{1,2,3,4,5};
         ListNode listNode = buildListNode(input);
 
         ArrayList<Integer> ret =  null;
-        ret = printListFromTailToHead(listNode);
+        ret = printListFromTailToHeadStack(listNode);
         System.out.println(ret.toString());
     }
 
